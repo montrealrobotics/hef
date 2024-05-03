@@ -4,7 +4,7 @@ title: Project template
 permalink: index.html
 use_math: True
 carousels:
-  - images:
+- images:
       - image: "img/moving_banana.gif"
       - image: "img/banana.png"
 ---
@@ -19,13 +19,11 @@ carousels:
 <div style="text-align: center;"><em>*Authors contributed equally.</em></div>
 
 <!--Badges-->
-[//]: # (TODO: Fix paper badge)
 <br>
 {% include_relative _relative_includes/badges.html %}
 <br>
 
 <!--Teaser Video-->
-[//]: # (TODO: Update video once final one is ready)
 <a id="main_video"></a>
 {% include_relative _relative_includes/main_video.html %}
 <br>
@@ -41,7 +39,7 @@ In this paper, we introduce a novel approach to nonparametric Bayesian filtering
 ## About
 [//]: # (TODO: update paper link)
 <p style="text-align: justify;">
-    In this page we present an <em>intuitive</em> introduction to our Harmonic Exponential filter, as well as additional videos. For further information and a more detailed explanation, please refer to <a href="https://arxiv.org/abs/2303.04011">our paper!</a>
+    In this page we present an <em>intuitive</em> introduction to our Harmonic Exponential filter, as well as additional videos. For further information and a more detailed explanation, please refer to <a href="https://github.com/montrealrobotics/harmonic-filter">our paper!</a>
 </p>
 
 ## Task
@@ -51,16 +49,16 @@ In this paper, we introduce a novel approach to nonparametric Bayesian filtering
 
 ## Method
 <p style="text-align: justify;">
-    We propose the Harmonic Exponential Filter (HEF), an exact approach to computing the posterior belief $p(x_t\vert z_{1:t},u_{1:t})$ of the Bayes filter on a compact Lie group (such as motion groups), for band limited prior $p(x_{t-1}\vert z_{1:t-1},u_{1:t-1})$, motion $p(x_t \vert u_t, x_{t-1})$, and measurement likelihood $p(z_t \vert x_t)$. The key idea of our filter is to leverage the harmonic exponential distribution, a class of probability distributions supported on groups and homogeneous spaces and whose parameters are the <em>Fourier coefficients</em> of the log-likelihood function. To preserve the structure of motion groups, we use a generalized form of the Fourier transform that allows us to compute the convolution and product of two distributions efficiently. These two insights allow us to compute the prediction and update step as follows.
+    We propose the Harmonic Exponential Filter (HEF), an exact approach to computing the posterior belief $p(x_t\vert z_{1:t},u_{1:t})$ of the Bayes filter on a compact Lie group, for band limited prior $p(x_{t-1}\vert z_{1:t-1},u_{1:t-1})$, motion $p(x_t \vert u_t, x_{t-1})$, and measurement likelihood $p(z_t \vert x_t)$. The key idea of our filter is to leverage the harmonic exponential distribution, a class of probability distributions supported on groups and homogeneous spaces and whose parameters are the <em>Fourier coefficients</em> of the log-likelihood function. To preserve the structure of motion groups, we use a generalized form of the Fourier transform that allows us to compute the convolution and product of two distributions efficiently. These two insights allow us to compute the prediction and update step as follows.
 </p>
 <ul>
-  <li><a style="font-weight: bold">Prediction step</a>: By assuming that the motion is fully defined by the control input $u_t$, we write the motion model as the likelihood of the relative motion from $x_{t−1}$ to $x_t$, matching the relative motion induced by $u_t$ Hence, the integral $\overline{bel}(x_t) = \int_{SE(N)} p(x_t \vert u_t, x_{t-1}) bel(x_{t-1}) \, dx_{t-1}$ can be written as a convolution, which we efficiently solve using the Fourier convolution theorem.</li>
-  <li><a style="font-weight: bold">Update step</a>: Given a predicted belief and measurement likelihood, both defined as harmonic exponential distributions, the update step is computed via an element-wise addition of the parameters of the two densities.</li>
-  <li><a style="font-weight: bold">Normalization</a>: We can compute the normalization constant using Fourier analysis and compute the exact expression for the posterior belief.</li>
+  <li><a style="font-weight: bold">Prediction step</a>: By assuming that the motion is fully defined by the control input $u_t$, we write the motion model as the likelihood of the relative motion from $x_{t−1}$ to $x_t$, matching the relative motion induced by $u_t$. Hence, the integral $\overline{bel}(x_t) = \int_{SE(N)} p(x_t \vert u_t, x_{t-1}) bel(x_{t-1}) \, dx_{t-1}$ can be written as a convolution, which we efficiently solve using the Fourier convolution theorem.</li>
+  <li><a style="font-weight: bold">Update step</a>: Given a predicted belief and measurement likelihood, both defined with the density of the harmonic exponential distribution, the update step is computed via an element-wise addition of the parameters of the two densities.</li>
+  <li><a style="font-weight: bold">Normalization</a>: We can compute the normalization constant using Fourier analysis and retrieve the posterior belief.</li>
 </ul>
 
 <p style="text-align: justify;">
-    To showcase the effectiveness of our approach capturing real-world distributions, such as the banana-shape distribution. This distribution appears when the uncertainty in the heading of an agent increases due to the accumulation of error during multiple prediction steps. Starting from a rectangular prior and a Gaussian motion likelihood, we take steps in a horizontal straight path to the right. As expected, the banana-shape distribution emerges after few iterations.
+    To showcase the effectiveness of our approach capturing real-world distributions, we model the <em>banana-shape distribution</em> with our filter. This distribution appears when the uncertainty in the heading of an agent increases due to the accumulation of error during multiple prediction steps. Starting from a rectangular prior and a Gaussian motion likelihood, we take steps in a horizontal straight path to the right. As expected, the banana-shape distribution emerges after few iterations.
 </p>
 
 <br>
@@ -68,7 +66,7 @@ In this paper, we introduce a novel approach to nonparametric Bayesian filtering
 <br>
 
 <p style="text-align: justify;">
-    We compare the ability of our HEF capturing the banana-shape distribution against three other well established filtering approaches in the literature. The results highlight how only the HEF and particle filter are capable of modelling the banana distribution.
+    We compare the ability of our HEF capturing the banana-shape distribution against three other well established filtering approaches in the literature. The results highlight how only the HEF and particle filter are capable of modeling it.
 </p>
 
 <br>
@@ -127,11 +125,11 @@ In this paper, we introduce a novel approach to nonparametric Bayesian filtering
 </p>
 
 <br>
-{% include_relative _relative_includes/row_videos_x2.html title_1="Run 1 - Five landmarks" title_2="Run 2 - Five landmarks" src_1="img/uwb/result.mp4" src_2="img/uwb/result.mp4" %}
-{% include_relative _relative_includes/row_videos_x2.html title_1="Run 1 - Four landmarks" title_2="Run 2 - Four landmarks" src_1="img/uwb/result.mp4" src_2="img/uwb/result.mp4" %}
-{% include_relative _relative_includes/row_videos_x2.html title_1="Run 1 - Three landmarks" title_2="Run 2 - Three landmarks" src_1="img/uwb/result.mp4" src_2="img/uwb/result.mp4" %}
-{% include_relative _relative_includes/row_videos_x2.html title_1="Run 1 - Two landmarks" title_2="Run 2 - Two landmarks" src_1="img/uwb/result.mp4" src_2="img/uwb/result.mp4" %}
-{% include_relative _relative_includes/row_videos_x2.html title_1="Run 1 - One landmarks" title_2="Run 2 - One landmarks" src_1="img/uwb/result.mp4" src_2="img/uwb/result.mp4" %}
+{% include_relative _relative_includes/row_videos_x2.html title_1="Run 1 - Five landmarks" title_2="Run 2 - Five landmarks" src_1="img/uwb/run1_5landmarks.mp4" src_2="img/uwb/run1_5landmarks.mp4" %}
+{% include_relative _relative_includes/row_videos_x2.html title_1="Run 1 - Four landmarks" title_2="Run 2 - Four landmarks" src_1="img/uwb/run1_4landmarks.mp4" src_2="img/uwb/run1_4landmarks.mp4" %}
+{% include_relative _relative_includes/row_videos_x2.html title_1="Run 1 - Three landmarks" title_2="Run 2 - Three landmarks" src_1="img/uwb/run1_3landmarks.mp4" src_2="img/uwb/run1_3landmarks.mp4" %}
+{% include_relative _relative_includes/row_videos_x2.html title_1="Run 1 - Two landmarks" title_2="Run 2 - Two landmarks" src_1="img/uwb/run1_2landmarks.mp4" src_2="img/uwb/run1_2landmarks.mp4" %}
+{% include_relative _relative_includes/row_videos_x2.html title_1="Run 1 - One landmarks" title_2="Run 2 - One landmarks" src_1="img/uwb/run1_1landmarks.mp4" src_2="img/uwb/run1_1landmarks.mp4" %}
 <br>
 
 <p style="text-align: justify;">
