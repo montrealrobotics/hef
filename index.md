@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Project template
+title: HEF
 permalink: index.html
 use_math: True
 carousels:
@@ -109,7 +109,7 @@ In this paper, we introduce a novel approach to nonparametric Bayesian filtering
 
 <br>
 {% include_relative _relative_includes/simulator_table.html %}
-<br>
+<br>https://github.com/montrealrobotics/real-lab-wiki/blob/main/How-to-update-the-website.md
 
 ## UWB experiments
 <p style="text-align: justify;">
