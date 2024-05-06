@@ -125,11 +125,11 @@ In this paper, we introduce a novel approach to nonparametric Bayesian filtering
 </p>
 
 <br>
-{% include_relative _relative_includes/row_videos_x2.html title_1="Run 1 - Five landmarks" title_2="Run 2 - Five landmarks" src_1="img/uwb/run1_5landmarks.mp4" src_2="img/uwb/run1_5landmarks.mp4" %}
-{% include_relative _relative_includes/row_videos_x2.html title_1="Run 1 - Four landmarks" title_2="Run 2 - Four landmarks" src_1="img/uwb/run1_4landmarks.mp4" src_2="img/uwb/run1_4landmarks.mp4" %}
-{% include_relative _relative_includes/row_videos_x2.html title_1="Run 1 - Three landmarks" title_2="Run 2 - Three landmarks" src_1="img/uwb/run1_3landmarks.mp4" src_2="img/uwb/run1_3landmarks.mp4" %}
-{% include_relative _relative_includes/row_videos_x2.html title_1="Run 1 - Two landmarks" title_2="Run 2 - Two landmarks" src_1="img/uwb/run1_2landmarks.mp4" src_2="img/uwb/run1_2landmarks.mp4" %}
-{% include_relative _relative_includes/row_videos_x2.html title_1="Run 1 - One landmarks" title_2="Run 2 - One landmarks" src_1="img/uwb/run1_1landmarks.mp4" src_2="img/uwb/run1_1landmarks.mp4" %}
+{% include_relative _relative_includes/row_videos_x2.html title_1="Run 1 - Five landmarks" title_2="Run 2 - Five landmarks" src_1="img/uwb/run1_5landmarks.mp4" src_2="img/uwb/run2_5landmarks.mp4" %}
+{% include_relative _relative_includes/row_videos_x2.html title_1="Run 1 - Four landmarks" title_2="Run 2 - Four landmarks" src_1="img/uwb/run1_4landmarks.mp4" src_2="img/uwb/run2_4landmarks.mp4" %}
+{% include_relative _relative_includes/row_videos_x2.html title_1="Run 1 - Three landmarks" title_2="Run 2 - Three landmarks" src_1="img/uwb/run1_3landmarks.mp4" src_2="img/uwb/run2_3landmarks.mp4" %}
+{% include_relative _relative_includes/row_videos_x2.html title_1="Run 1 - Two landmarks" title_2="Run 2 - Two landmarks" src_1="img/uwb/run1_2landmarks.mp4" src_2="img/uwb/run2_2landmarks.mp4" %}
+{% include_relative _relative_includes/row_videos_x2.html title_1="Run 1 - One landmarks" title_2="Run 2 - One landmarks" src_1="img/uwb/run1_1landmarks.mp4" src_2="img/uwb/run2_1landmarks.mp4" %}
 <br>
 
 <p style="text-align: justify;">
