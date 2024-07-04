@@ -87,7 +87,7 @@ In this paper, we introduce a novel approach to nonparametric Bayesian filtering
 
 ## Experimental setup
 <p style="text-align: justify;">
-    All our experiments focus on two main metrics. The first is the root mean squared error (RMSE) of the posterior predictive mean to the ground truth position of the agent, measured in meters. However, as this metric does not entirely encapsulate the non-Gaussian nature of these estimators, we also calculate the negative log-likelihood (NLL) of the ground truth position under the current belief. In these assessments, our proposed HEF is compared against the following filtering approaches: an EKF implementation that assumes unimodal Gaussian state and error, a histogram filter (HistF), and a particle filter (PF).
+    All our experiments focus on two main metrics. The first metric is the absolute trajectory error (ATE), calculated using two different estimators of the robot position: the mode and the mean of the posterior belief. The ATE, measured in meters, is calculated along the entire trajectory, and we also report its standard deviation. However, as this metric does not entirely encapsulate the non-Gaussian nature of these estimators, we also calculate the negative log-likelihood (NLL) of the ground truth position under the current belief. In these assessments, our proposed HEF is compared against the following filtering approaches: an EKF implementation that assumes unimodal Gaussian state and error, a histogram filter (HistF), and a particle filter (PF).
 </p>
 
 ## Simulation experiments
@@ -109,7 +109,7 @@ In this paper, we introduce a novel approach to nonparametric Bayesian filtering
 
 <br>
 {% include_relative _relative_includes/simulator_table.html %}
-<br>https://github.com/montrealrobotics/real-lab-wiki/blob/main/How-to-update-the-website.md
+<br>
 
 ## UWB experiments
 <p style="text-align: justify;">
@@ -137,7 +137,9 @@ In this paper, we introduce a novel approach to nonparametric Bayesian filtering
 </p>
 
 <br>
-{% include_relative _relative_includes/uwb_table.html %}
+{% include_relative _relative_includes/row_tables_x2.html title_1="Five beacons" title_2="Four beacons" src_1="img/uwb/table_uwb5.png" src_2="img/uwb/table_uwb4.png" %}
+{% include_relative _relative_includes/row_tables_x2.html title_1="Three beacons" title_2="Two beacons" src_1="img/uwb/table_uwb3.png" src_2="img/uwb/table_uwb2.png" %}
+{% include_relative _relative_includes/uwb_table1.html %}
 <br>
 
 ## Doors' experiments
@@ -147,6 +149,13 @@ In this paper, we introduce a novel approach to nonparametric Bayesian filtering
 
 <br>
 {% include_relative _relative_includes/doors_video.html %}
+<br>
+
+<p style="text-align: justify;">
+    The quantitative results of this experiments are presented below.
+</p>
+
+{% include_relative _relative_includes/doors_table.html %}
 <br>
 
 ## Citation
