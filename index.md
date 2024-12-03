@@ -33,7 +33,7 @@ carousels:
 <div style="text-align: center; width: 85%; margin:auto">
 <p style='text-align: justify; font-style: italic'> 
 <a style="font-weight: bold"> Abstract. </a>Bayesian estimation is a vital tool in robotics as it allows systems to update the belief of the robot state using incomplete information from noisy sensors. To render the state estimation problem tractable, many systems assume that the motion and measurement noise, as well as the state distribution, are all unimodal and Gaussian. However, there are numerous scenarios and systems that do not comply with these assumptions. Existing non-parametric filters that are used to model multimodal distributions have drawbacks that limit their ability to represent a diverse set of distributions.
-In this paper, we introduce a novel approach to nonparametric Bayesian filtering to cope with multimodal distributions using harmonic exponential distributions. This approach leverages two key insights of harmonic exponential distributions: a) the product of two distributions can be expressed as the element-wise addition of their log-likelihood Fourier coefficients, and b) the convolution of two distributions can be efficiently computed as the tensor product of their Fourier coefficients. These observations enable the development of an efficient and exact solution to the Bayes filter up to the band limit of a Fourier transform.  We demonstrate our filter's superior performance compared with established nonparametric filtering methods across a range of simulated and real-world localization tasks.</p>
+This paper introduces a novel approach to nonparametric Bayesian filtering on motion groups, designed to handle multimodal distributions using harmonic exponential distributions. This approach leverages two key insights of harmonic exponential distributions: a) the product of two distributions can be expressed as the element-wise addition of their log-likelihood Fourier coefficients, and b) the convolution of two distributions can be efficiently computed as the tensor product of their Fourier coefficients. These observations enable the development of an efficient and asymtotically exact solution to the Bayes filter up to the band limit of a Fourier transform.  We demonstrate our filter's superior performance compared with established nonparametric filtering methods across a range of simulated and real-world localization tasks.</p>
 </div>
 
 ## About
@@ -66,11 +66,19 @@ In this paper, we introduce a novel approach to nonparametric Bayesian filtering
 <br>
 
 <p style="text-align: justify;">
-    We compare the ability of our HEF capturing the banana-shape distribution against three other well established filtering approaches in the literature. The results highlight how only the HEF and particle filter are capable of modeling it.
+    We compare the ability of our HEF capturing the banana-shape distribution against four other well established filtering approaches in the literature. The results highlight how only the HEF, IEKF and particle filter are capable of modeling it.
 </p>
 
 <br>
 {% include_relative _relative_includes/banana_comparison.html %}
+<br>
+
+<p style="text-align: justify;">
+    We demonstrate how the HEF effectively models both continuous and discrete densities, comparing it to a histogram-based approach. While the histogram excels at capturing square-like distributions, the HEF performs better at modeling continuous densities, as evidenced by a lower Kullback–Leibler divergence. As motion and measurement models are typically smoothly-varying functions, the HEF is a good candidate for many real-world robotics applications. 
+</p>
+
+<br>
+{% include_relative _relative_includes/row_tables_x2.html title_1="Mixture of Von mises Densities" title_2="Square-like Density" src_1="img/von_mise_reconstruction.png" src_2="img/square_reconstruction.png" %} 
 <br>
 
 <p style="text-align: justify;">
@@ -87,12 +95,12 @@ In this paper, we introduce a novel approach to nonparametric Bayesian filtering
 
 ## Experimental setup
 <p style="text-align: justify;">
-    All our experiments focus on two main metrics. The first metric is the absolute trajectory error (ATE), calculated using two different estimators of the robot position: the mode and the mean of the posterior belief. The ATE, measured in meters, is calculated along the entire trajectory, and we also report its standard deviation. However, as this metric does not entirely encapsulate the non-Gaussian nature of these estimators, we also calculate the negative log-likelihood (NLL) of the ground truth position under the current belief. In these assessments, our proposed HEF is compared against the following filtering approaches: an EKF implementation that assumes unimodal Gaussian state and error, a histogram filter (HistF), and a particle filter (PF).
+    All our experiments focus on two main metrics. The first metric is the absolute trajectory error (ATE), calculated using two different estimators of the robot position: the mode and the mean of the posterior belief. The ATE, measured in meters, is calculated along the entire trajectory, and we also report its standard deviation. However, as this metric does not entirely encapsulate the non-Gaussian nature of these estimators, we also calculate the negative log-posterior (NLP) of the ground truth position under the current belief. In these assessments, our proposed HEF is compared against the following filtering approaches: an EKF implementation that assumes unimodal Gaussian state and error, a histogram filter (HistF), and a particle filter (PF).
 </p>
 
 ## Simulation experiments
 <p style="text-align: justify;">
-    The simulation experiments use range-only measurements. This environment includes a series of landmarks arranged in a line. The robot travels in a counterclockwise circle around the landmarks. The landmarks alternate in providing a range measurement at each timestamp, where we assume known correspondence.
+    The simulation experiments use range-only measurements. This environment includes a series of landmarks arranged in a line. The robot travels in a counterclockwise circle around the landmarks. The landmarks alternate in providing a range measurement at each timestamp, where we assume known correspondence. All experiments but the EKF start from a bi-modal prior.
 </p>
 
 <p style="text-align: justify;">
