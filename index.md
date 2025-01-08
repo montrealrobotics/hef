@@ -1,6 +1,6 @@
 ---
 layout: default
-title: HEF
+title: Harmonic Exponential Filter
 permalink: index.html
 use_math: True
 carousels:
@@ -12,11 +12,10 @@ carousels:
 <h1 style="text-align: center; font-family: Helvetica, sans-serif">The Harmonic Exponential Filter for Nonparametric Estimation on Motion Groups</h1>
 
 <!--Venue-->
-<h4 style="text-align: center; font-family: Helvetica, sans-serif, font-weight: bold">Pre-print</h4>
+<h4 style="text-align: center; font-family: Helvetica, sans-serif, font-weight: bold">IEEE Robotics and Automation Letters (RA-L 2025)</h4>
 
 <!--Authors-->
 {% include_relative _relative_includes/authors.html %}
-<div style="text-align: center;"><em>*Authors contributed equally.</em></div>
 
 <!--Badges-->
 <br>
@@ -32,12 +31,10 @@ carousels:
 [//]: # (Abstract)
 <div style="text-align: center; width: 85%; margin:auto">
 <p style='text-align: justify; font-style: italic'> 
-<a style="font-weight: bold"> Abstract. </a>Bayesian estimation is a vital tool in robotics as it allows systems to update the belief of the robot state using incomplete information from noisy sensors. To render the state estimation problem tractable, many systems assume that the motion and measurement noise, as well as the state distribution, are all unimodal and Gaussian. However, there are numerous scenarios and systems that do not comply with these assumptions. Existing non-parametric filters that are used to model multimodal distributions have drawbacks that limit their ability to represent a diverse set of distributions.
-This paper introduces a novel approach to nonparametric Bayesian filtering on motion groups, designed to handle multimodal distributions using harmonic exponential distributions. This approach leverages two key insights of harmonic exponential distributions: a) the product of two distributions can be expressed as the element-wise addition of their log-likelihood Fourier coefficients, and b) the convolution of two distributions can be efficiently computed as the tensor product of their Fourier coefficients. These observations enable the development of an efficient and asymtotically exact solution to the Bayes filter up to the band limit of a Fourier transform.  We demonstrate our filter's superior performance compared with established nonparametric filtering methods across a range of simulated and real-world localization tasks.</p>
+<a style="font-weight: bold"> Abstract. </a>Bayesian estimation is a vital tool in robotics as it allows systems to update the robot state belief using incomplete information from noisy sensors. To render the state estimation problem tractable, many systems assume that the motion and measurement noise, as well as the state distribution, are all unimodal and Gaussian. However, there are numerous scenarios and systems that do not comply with these assumptions. Existing nonparametric filters that are used to model multimodal distributions have drawbacks that limit their ability to represent a diverse set of distributions. This paper introduces a novel approach to nonparametric Bayesian filtering on motion groups, designed to handle multimodal distributions using harmonic exponential distributions. This approach leverages two key insights of harmonic exponential distributions: a) the product of two distributions can be expressed as the element-wise addition of their log-likelihood Fourier coefficients, and b) the convolution of two distributions can be efficiently computed as the tensor product of their Fourier coefficients. These observations enable the development of an efficient and asymptotically exact solution to the Bayes filter up to the band limit of a Fourier transform. We demonstrate our filter's superior performance compared with established nonparametric filtering methods across a range of simulated and real-world localization tasks.</p>
 </div>
 
 ## About
-[//]: # (TODO: update paper link)
 <p style="text-align: justify;">
     In this page we present an <em>intuitive</em> introduction to our Harmonic Exponential filter, as well as additional videos. For further information and a more detailed explanation, please refer to <a href="https://github.com/montrealrobotics/harmonic-filter">our paper!</a>
 </p>
@@ -49,10 +46,10 @@ This paper introduces a novel approach to nonparametric Bayesian filtering on mo
 
 ## Method
 <p style="text-align: justify;">
-    We propose the Harmonic Exponential Filter (HEF), an exact approach to computing the posterior belief $p(x_t\vert z_{1:t},u_{1:t})$ of the Bayes filter on a compact Lie group, for band limited prior $p(x_{t-1}\vert z_{1:t-1},u_{1:t-1})$, motion $p(x_t \vert u_t, x_{t-1})$, and measurement likelihood $p(z_t \vert x_t)$. The key idea of our filter is to leverage the harmonic exponential distribution, a class of probability distributions supported on groups and homogeneous spaces and whose parameters are the <em>Fourier coefficients</em> of the log-likelihood function. To preserve the structure of motion groups, we use a generalized form of the Fourier transform that allows us to compute the convolution and product of two distributions efficiently. These two insights allow us to compute the prediction and update step as follows.
+    We propose the Harmonic Exponential Filter (HEF), an asymptotically exact approach to computing the posterior belief $p(x_t\vert z_{1:t},u_{1:t})$ of the Bayes filter on a compact Lie group, for band limited prior $p(x_{t-1}\vert z_{1:t-1},u_{1:t-1})$, motion $p(x_t \vert u_t, x_{t-1})$, and measurement likelihood $p(z_t \vert x_t)$. The key idea of our filter is to leverage the harmonic exponential distribution, a class of probability distributions supported on groups and homogeneous spaces and whose parameters are the <em>Fourier coefficients</em> of the log-density function. To preserve the structure of motion groups, we leverage a generalized Fourier transform that allows the efficient computation of both the convolution and product of two distributions. These two insights allow us to compute the prediction and update step as follows.
 </p>
 <ul>
-  <li><a style="font-weight: bold">Prediction step</a>: By assuming that the motion is fully defined by the control input $u_t$, we write the motion model as the likelihood of the relative motion from $x_{t−1}$ to $x_t$, matching the relative motion induced by $u_t$. Hence, the integral $\overline{bel}(x_t) = \int_{SE(N)} p(x_t \vert u_t, x_{t-1}) bel(x_{t-1}) \, dx_{t-1}$ can be written as a convolution, which we efficiently solve using the Fourier convolution theorem.</li>
+  <li><a style="font-weight: bold">Prediction step</a>: Defining the motion model as $x_t = x_{t-1} \circ u_t$, where $u_t$ is a random variable with a known density and $\circ$ a composition operator, the relative motion can be calculated as $x^{-1}_{t-1} \circ x_t = u_t$. Hence, the integral $\overline{bel}(x_t) = \int_{SE(N)} p(x_t \vert u_t, x_{t-1}) bel(x_{t-1}) \, dx_{t-1}$ can be written as a convolution, which we efficiently solve using the Fourier convolution theorem.</li>
   <li><a style="font-weight: bold">Update step</a>: Given a predicted belief and measurement likelihood, both defined with the density of the harmonic exponential distribution, the update step is computed via an element-wise addition of the parameters of the two densities.</li>
   <li><a style="font-weight: bold">Normalization</a>: We can compute the normalization constant using Fourier analysis and retrieve the posterior belief.</li>
 </ul>
@@ -66,7 +63,7 @@ This paper introduces a novel approach to nonparametric Bayesian filtering on mo
 <br>
 
 <p style="text-align: justify;">
-    We compare the ability of our HEF capturing the banana-shape distribution against four other well established filtering approaches in the literature. The results highlight how only the HEF, IEKF and particle filter are capable of modeling it.
+    We compare the ability of our HEF capturing the banana-shape distribution against four other well established filtering approaches in the literature. The results highlight how only the HEF, Invariant EKF and particle filter are capable of modeling it.
 </p>
 
 <br>
@@ -74,7 +71,7 @@ This paper introduces a novel approach to nonparametric Bayesian filtering on mo
 <br>
 
 <p style="text-align: justify;">
-    We demonstrate how the HEF effectively models both continuous and discrete densities, comparing it to a histogram-based approach. While the histogram excels at capturing square-like distributions, the HEF performs better at modeling continuous densities, as evidenced by a lower Kullback–Leibler divergence. As motion and measurement models are typically smoothly-varying functions, the HEF is a good candidate for many real-world robotics applications. 
+    We demonstrate how the HEF effectively models both continuous and discrete densities, comparing it to a histogram-based approach. While the histogram excels at capturing <em>discontinuous</em> square-like densities, the HEF performs better at modeling continuous densities, as evidenced by a lower Kullback–Leibler divergence. As motion and measurement models are typically smoothly-varying functions, the HEF is a good candidate for many real-world robotics applications. 
 </p>
 
 <br>
